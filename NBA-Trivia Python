@@ -1,0 +1,73 @@
+import random
+
+
+# Array of Questions For Game
+questions = [
+    ("Who was the MVP of the 2024 NBA Finals?", "Jaylen Brown"),
+    ("Which team has won the most NBA championships?", "Boston Celtics"),
+    ("Who holds the record for the most points scored in a single NBA game?", "Wilt Chamberlain"),
+    ("Which player is known as 'The King'?", "LeBron James"),
+    ("Who is the all-time leading scorer in the NBA?", "Lebron James"),
+    ("Which team won the NBA championship in 2020?", "Los Angeles Lakers"),
+    ("Who was the first player to be drafted #1 overall without playing college or high school basketball in the U.S.?", "Yao Ming"),
+    ("Which player has the nickname 'The Greek Freak'?", "Giannis Antetokounmpo"),
+    ("Who was known as 'The Big Aristotle'?", "Shaq"),
+    ("Which player has won the most NBA MVP awards?", "Kareem Abdul-Jabbar"),
+    ("Who was the first player to record a triple-double in an NBA All-Star game?", "Michael Jordan"),
+    ("Which team drafted Kobe Bryant?", "Charlotte Hornets"),
+    ("Who has the most game winning shots in NBA playoff history?", "Lebron James"),
+    ("Which NBA player has the most points all time in the Olympics?", "Kevin Durant"),
+    ("Who was the first non-American player to win the NBA MVP award?", "Hakeem Olajuwon")
+]
+
+def ask_question():
+    question, answer = random.choice(questions)
+    return question, answer
+
+def start_game():
+    points = 0
+    total_questions = len(questions)
+
+
+    print("Welcome to the NBA Trivia Game")
+    print("Type 'exit' to quit the game")
+
+    while questions:
+        question, correct_answer = ask_question()
+        print(f"\n  {question}")
+
+        guesses = 0
+        while guesses < 2:
+            user_answer = input("Your Answer: ").strip()
+
+            if user_answer.lower() == 'exit':
+                print("Thanks For Playing! See Ya!")
+                return
+            elif user_answer == "":
+                print("Nothing was entered. Try again playa")
+            elif user_answer.lower() == correct_answer.lower():
+                print("CORRECT!!!")
+                points += 1
+                break
+            else:
+                guesses += 1
+                if guesses < 2:
+                    print("Incorrect! Try again")
+                else:
+                    print(f"Incorrect... The correct answer is: {correct_answer}")
+
+
+        questions.remove((question, correct_answer))
+
+    print("\nGame Over")
+    print(f"You scored {points} out of {total_questions} points")
+
+
+    if points == total_questions:
+        print("Perfect Score! Your NBA Knowledge Is Strong!!")
+    elif points > total_questions // 2:
+        print("Nice Job You Scored Well, You're a real NBA Fan")
+    else:
+        print("You Don't Know Basketball, Get In The Lab Bruh")
+
+start_game()  
